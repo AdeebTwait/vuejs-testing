@@ -79,6 +79,17 @@
             {{ currentUser.username }}
           </router-link>
         </li>
+        <li class="nav-item">
+          <a
+            href="#"
+            class="nav-link"
+            active-class="active"
+            exact
+            @click="logout"
+          >
+            Logout
+          </a>
+        </li>
       </ul>
     </div>
   </nav>
@@ -86,11 +97,18 @@
 
 <script>
 import { mapGetters } from "vuex";
+import { LOGOUT } from "@/store/actions.type";
 
 export default {
   name: "RwvHeader",
   computed: {
     ...mapGetters(["currentUser", "isAuthenticated"])
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch(LOGOUT);
+      this.$router.push({ name: "login" });
+    }
   }
 };
 </script>
