@@ -19,7 +19,9 @@ const getters = {
     return state.articlesCount;
   },
   articles(state) {
-    return state.articles;
+    return state.articles.filter(
+      article => !article.title.toLowerCase().includes("test")
+    );
   },
   isLoading(state) {
     return state.isLoading;

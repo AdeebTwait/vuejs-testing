@@ -85,7 +85,7 @@
             class="nav-link"
             active-class="active"
             exact
-            @click="logout"
+            @click.prevent="logout"
           >
             Logout
           </a>
