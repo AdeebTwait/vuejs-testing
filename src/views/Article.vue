@@ -3,7 +3,10 @@
     <div class="banner">
       <div class="container">
         <h1>{{ article.title }}</h1>
-        <RwvArticleMeta :article="article" :actions="true"></RwvArticleMeta>
+        <div class="article-meta">
+          <RwvArticleInfo :article="article" />
+          <RwvArticleButtons :article="article" />
+        </div>
       </div>
     </div>
     <div class="container page">
@@ -22,7 +25,10 @@
       </div>
       <hr />
       <div class="article-actions">
-        <RwvArticleMeta :article="article" :actions="true"></RwvArticleMeta>
+        <div class="article-meta">
+          <RwvArticleInfo :article="article" />
+          <RwvArticleButtons :article="article" />
+        </div>
       </div>
       <div class="row">
         <div class="col-xs-12 col-md-8 offset-md-2">
@@ -54,24 +60,28 @@
 <script>
 import { mapGetters } from "vuex";
 import marked from "marked";
-import store from "@/store";
-import RwvComment from "@/components/Comment";
-import RwvCommentEditor from "@/components/CommentEditor";
-import RwvTag from "@/components/VTag";
-import { FETCH_ARTICLE, FETCH_COMMENTS } from "@/store/actions.type";
+import store from "../store";
+import RwvComment from "../components/Comment";
+import RwvCommentEditor from "../components/CommentEditor";
+import RwvTag from "../components/VTag";
+import RwvArticleButtons from "../components/ArticleButtons";
+import RwvArticleInfo from "../components/ArticleInfo";
+import { FETCH_ARTICLE, FETCH_COMMENTS } from "../store/actions.type";
 
 export default {
   name: "rwv-article",
+  components: {
+    RwvComment,
+    RwvCommentEditor,
+    RwvTag,
+    RwvArticleButtons,
+    RwvArticleInfo
+  },
   props: {
     slug: {
       type: String,
       required: true
     }
-  },
-  components: {
-    RwvComment,
-    RwvCommentEditor,
-    RwvTag
   },
   beforeRouteEnter(to, from, next) {
     Promise.all([
